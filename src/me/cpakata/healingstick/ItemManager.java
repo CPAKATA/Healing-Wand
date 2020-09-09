@@ -15,30 +15,74 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class ItemManager {
 	
-	public static ItemStack wand;
+	public static ItemStack HealWand;
+	public static ItemStack TeleportWand;
+	public static ItemStack ExplosionWand;
 	
-	public static void init() { createHealWand(); }
+	public static void init() {
+		createHealWand(); 
+		createTeleportWand();
+		createExplosionWand();
+	}
 	
 	private static void createHealWand() {
 		ItemStack item = new ItemStack(Material.STICK,1);
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName("Healing Stick");
+		meta.setDisplayName("&AHealing Stick");
 		List<String> lore = new ArrayList<>();
-		lore.add("This stick heals 2 hearts!");
+		lore.add("&EThis stick heals 2 hearts!");
 		meta.setLore(lore);
 		meta.addEnchant(Enchantment.LUCK, 1, false);
 		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 		item.setItemMeta(meta);
-		wand = item;
+		HealWand = item;
 		
 		
 		//Shaped Recipe
-		ShapedRecipe sr = new ShapedRecipe(NamespacedKey.minecraft("wand"), item);
-		sr.shape("I  "," S ","  S");
-		sr.setIngredient('I', Material.IRON_INGOT);
+		ShapedRecipe sr = new ShapedRecipe(NamespacedKey.minecraft("HealWand"), item);
+		sr.shape("E  "," S ","  S");
+		sr.setIngredient('E', Material.EMERALD);
 		sr.setIngredient('S', Material.STICK);
 		Bukkit.getServer().addRecipe(sr);
 		
+	}
+	
+	private static void createTeleportWand() {
+		ItemStack item = new ItemStack(Material.STICK,1);
+		ItemMeta meta = item.getItemMeta();
+		meta.setDisplayName("&5Teleport Stick");
+		List<String> lore = new ArrayList<>();
+		lore.add("&EWith that stick you can teleport!");
+		meta.setLore(lore);
+		meta.addEnchant(Enchantment.LUCK, 1, false);
+		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		item.setItemMeta(meta);
+		TeleportWand = item;
+		
+		ShapedRecipe sr = new ShapedRecipe(NamespacedKey.minecraft("TeleportWand"), item);
+		sr.shape("P  "," S ","  S");
+		sr.setIngredient('P', Material.ENDER_PEARL);
+		sr.setIngredient('S', Material.STICK);
+		Bukkit.getServer().addRecipe(sr);
+	}
+	
+	private static void createExplosionWand() {
+		ItemStack item = new ItemStack(Material.BLAZE_ROD,1);
+		ItemMeta meta = item.getItemMeta();
+		meta.setDisplayName("&CExplosion Stick");
+		List<String> lore = new ArrayList<>();
+		lore.add("&EBe ready...");
+		meta.setLore(lore);
+		meta.addEnchant(Enchantment.LUCK, 1, false);
+		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		item.setItemMeta(meta);
+		ExplosionWand = item;
+		
+		ShapedRecipe sr = new ShapedRecipe(NamespacedKey.minecraft("ExplosionWand"), item);
+		sr.shape("E  "," S ","  S");
+		sr.setIngredient('B', Material.BLAZE_POWDER);
+		sr.setIngredient('S', Material.STICK);
+		Bukkit.getServer().addRecipe(sr);
 	}
 	
 }
